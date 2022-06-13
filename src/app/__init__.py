@@ -1,7 +1,8 @@
-from flask import Flask, jsonify
-from src.app.routes import register_routes
+from flask import Flask
 from src.db import setup_db
 from .config import add_configurations
+from .routes import register_routes
+from .error_handlers import configure_error_handlers
 
 
 def create_app(env="development") -> Flask:
@@ -19,5 +20,8 @@ def create_app(env="development") -> Flask:
 
   # Registering the routes for the app
   register_routes(app)
+
+  # Configure Error handlers
+  configure_error_handlers(app)
 
   return app
