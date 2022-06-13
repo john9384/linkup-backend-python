@@ -7,8 +7,8 @@ API_PREFIX = os.environ.get('API_PREFIX')
 auth = Blueprint("auth", __name__, url_prefix=f'{API_PREFIX}/auth')
 
 
-@auth.get('/')
-async def index():
+@auth.get('/signup')
+async def signup():
   try:
     return success_response('Auth routes connected', {'message': 'Hello, world!'})
   except Exception as error:
