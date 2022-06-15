@@ -13,7 +13,12 @@ class BaseRepository:
     pass
 
   async def create(self, data: dict):
-    pass
+    entity = self.Model(**data)
+    db.session.add(entity)
+    db.session.commit()
+    db.session.refresh(entity)
+
+    return entity
 
   async def update(self, id, data: dict):
     pass

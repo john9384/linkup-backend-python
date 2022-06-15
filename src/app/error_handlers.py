@@ -7,10 +7,8 @@ def configure_error_handlers(app):
 
   @app.errorhandler(HTTPException)
   def handle_exception(e):
-    error_data = {
-        "status_code": e.code,
-        "name": e.name,
-        "description": e.description,
-    }
+    error_data = {}
+    if hasattr(e, 'data'):
+      error_data = e.data
 
     return error_response(e.description, error_data)

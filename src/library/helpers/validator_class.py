@@ -9,10 +9,10 @@ class Validator():
 
   def validate_email(self, email):
     # TODO: Fix regex wrong match
-    reg = re.compile("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+.(?:\.[a-zA-Z0-9-]+)*$")
+    reg = re.compile("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")
     if not email or email == '':
       return {'email': 'Email is required'}
-    elif re.match(reg, email):
+    elif re.match(reg, email) is False:
       return {'email': 'Email is not valid'}
 
   def validate_text(self, field, text):

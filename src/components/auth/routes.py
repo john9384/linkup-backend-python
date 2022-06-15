@@ -13,6 +13,7 @@ async def signup():
   try:
     form_data = request.json
     res_data = await signup_service(form_data)
+
     return success_response('Signup Complete', res_data)
   except Exception as error:
     print(error)
