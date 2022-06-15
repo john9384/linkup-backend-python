@@ -11,5 +11,3 @@ def add_configurations(app, env='development'):
     app.config.from_object(TestConfig)
   else:
     app.config.from_object(DevelopmentConfig)
-
-  logger.info('Configurations loaded')
