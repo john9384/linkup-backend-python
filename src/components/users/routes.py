@@ -1,5 +1,6 @@
 import os
 from flask import Blueprint, jsonify
+from src.app.authentication import authentication_required
 from src.library.helpers.response_builder import success_response
 from .model import User
 
@@ -8,6 +9,6 @@ users = Blueprint("users", __name__, url_prefix=f'{API_PREFIX}/users')
 
 
 @users.get('/')
-async def index():
-  test = User.query.all()
-  return success_response('User routes connected', {'message': test})
+@authentication_required
+def index(jwt_payload):
+  return success_response('User routes connected', jwt_payload)
