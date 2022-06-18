@@ -4,7 +4,7 @@ from src.library.helpers.jwt_helper import encode_field
 from src.library.helpers.raise_exception import FormException, DatabaseExeption, ValidationException
 from .form_validator import signup_validator, login_validator
 from src.components.users.repository import user_repo
-from src.library.utils.generate_username import generate_username
+from src.library.utils.generate_field import generate_username
 from src.library.utils.passlib_hash import encrypt_field, compare_field
 
 
@@ -12,12 +12,11 @@ async def signup_service(form_data: dict):
   form_errors = signup_validator(form_data)
 
   if len(form_errors) > 0:
-    raise FormException(form_errors)
+    raise FormException(BAD_REQUEST, form_errors)
 
   del form_data['confirm_password']
 
   existing_user = await user_repo.fetch_by_email(form_data['email'])
-  print(existing_user)
   if existing_user:
     raise DatabaseExeption(
         CONFLICT,
@@ -37,8 +36,6 @@ async def signup_service(form_data: dict):
 
 async def login_service(form_data: dict):
   form_errors = login_validator(form_data)
-
-  print(form_data)
   if len(form_errors) > 0:
     raise FormException(form_errors)
 
@@ -57,6 +54,7 @@ async def login_service(form_data: dict):
   if password_valid is False:
     raise DatabaseExeption(
         ValidationException,
+        BAD_REQUEST,
         {
             'message': 'Invalid Credential',
             'email': form_data['email']

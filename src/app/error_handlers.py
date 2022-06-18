@@ -11,4 +11,8 @@ def configure_error_handlers(app):
     if hasattr(e, 'data'):
       error_data = e.data
 
-    return error_response(e.description, error_data)
+    return error_response(
+        status_code=e.code,
+        message=e.description,
+        error=error_data
+    )

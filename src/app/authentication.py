@@ -20,8 +20,7 @@ def authentication_required(f):
     try:
       jwt_payload = decode_field(token)
     except:
-      raise Unauthorized()
+      raise Unauthorized("Unauthorized")
 
-    print("jwt gets here >>>>>>>>>>>>>>>>>>", jwt_payload)
     return f(jwt_payload, *args, **kwargs)
   return decorator
