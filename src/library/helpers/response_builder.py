@@ -14,7 +14,6 @@ def build_response(status_code: int, success: bool, message: str, data: dict = {
   else:
     response_body['data'] = data
 
-  print(response_body)
   return Response(json.dumps(response_body), status=status_code, mimetype="application/json")
 
 
