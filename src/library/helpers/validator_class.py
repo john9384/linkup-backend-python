@@ -17,7 +17,6 @@ class Validator():
 
   def validate_text(self, field, text):
     reg = re.compile("^[a-zA-z ,.'-]+$")
-    print(text, field)
     if not text or text == '':
       return {field: f'{field} is required'}
     elif not re.match(reg, text):

@@ -8,9 +8,22 @@ def raise_exception(error):
   raise error
 
 
-class FormExceptions(HTTPException):
-  def __init__(self, error_data: dict):
-    self.code = 400
+class FormException(HTTPException):
+  def __init__(self, status_code, error_data: dict):
+    self.code = status_code or 400
     self.description = 'Form validation error'
     self.data = error_data
-  pass
+
+
+class DatabaseExeption(HTTPException):
+  def __init__(self, status_code, error_data: dict):
+    self.code = status_code or 500
+    self.description = 'Database error'
+    self.data = error_data
+
+
+class ValidationException(HTTPException):
+  def __init__(self, status_code, error_data: dict):
+    self.code = status_code or 500
+    self.description = 'Database error'
+    self.data = error_data

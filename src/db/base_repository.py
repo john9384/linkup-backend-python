@@ -7,7 +7,8 @@ class BaseRepository:
     self.Model = Model
 
   async def fetch_by_id(self, id):
-    pass
+    entity = self.Model.query.filter_by(id=id).first()
+    return entity
 
   async def fetch_all(self):
     pass

@@ -14,3 +14,7 @@ dev_env = os.environ.get('APP_ENV')
 def setup_db(app) -> None:
   db.init_app(app)
   migrate.init_app(app, db, directory="src/db/migrations")
+
+  @app.teardown_appcontext
+  def shutdown_session(exception=None):
+    db.session.remove()
