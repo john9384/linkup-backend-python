@@ -2,7 +2,7 @@ import os
 import jwt
 import datetime
 
-SECRET_KEY = os.environ.get('DATABASE_URI')
+SECRET_KEY = os.environ.get('DATABASE_URL')
 ALGORITHM = os.environ.get('JWT_ALGORITHM') or "HS256"
 
 
